@@ -1,0 +1,39 @@
+/* ListenButton — TTS trigger styling */
+.listen-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-accent-primary);
+  background: rgba(255, 153, 51, 0.08);
+  border: 1px solid rgba(255, 153, 51, 0.2);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.listen-btn:hover {
+  background: rgba(255, 153, 51, 0.15);
+  border-color: rgba(255, 153, 51, 0.4);
+  transform: translateY(-1px);
+}
+
+.listen-btn.playing {
+  background: var(--color-accent-primary);
+  color: #0B1E3A;
+  border-color: var(--color-accent-primary);
+  animation: pulse-listen 1.5s ease-in-out infinite;
+}
+
+.listen-btn svg {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+@keyframes pulse-listen {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}

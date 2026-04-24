@@ -1,0 +1,214 @@
+/* Myth Buster Styles */
+
+.custom-checker {
+  margin-bottom: var(--spacing-2xl);
+  text-align: center;
+}
+
+.custom-checker h3 {
+  font-size: 1.3rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.custom-checker > p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.checker-input-row {
+  display: flex;
+  gap: var(--spacing-sm);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.checker-input-row input {
+  flex: 1;
+  padding: 0.85rem 1rem;
+}
+
+.ai-verdict {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  background: var(--color-bg-input);
+  border-radius: var(--radius-md);
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.verdict-badge {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-sm);
+}
+
+.verdict-explanation {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-sm);
+}
+
+.verdict-source {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* Category Filter */
+.myth-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-xl);
+  justify-content: center;
+}
+
+.cat-btn {
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-fast);
+}
+
+.cat-btn:hover {
+  border-color: var(--color-accent-primary);
+  color: var(--color-text-primary);
+}
+
+.cat-btn.active {
+  background: var(--color-accent-primary);
+  border-color: var(--color-accent-primary);
+  color: white;
+}
+
+/* Myths List */
+.myths-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.myth-card {
+  padding: 0 !important;
+  overflow: hidden;
+  animation: fadeInUp 0.4s ease-out both;
+}
+
+.myth-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  text-align: left;
+  gap: var(--spacing-md);
+}
+
+.myth-header-left {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+}
+
+.myth-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.myth-header h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: var(--spacing-xs);
+}
+
+.myth-chevron {
+  color: var(--color-text-muted);
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+  font-size: 0.7rem;
+}
+
+.myth-chevron.open {
+  transform: rotate(180deg);
+}
+
+.myth-body {
+  padding: 0 var(--spacing-lg) var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--spacing-lg);
+}
+
+.fact-block {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+  padding: var(--spacing-md);
+  background: var(--color-success-bg);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.fact-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.fact-block p {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-top: 0.25rem;
+}
+
+.myth-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.did-you-know {
+  padding: var(--spacing-md);
+  background: var(--color-info-bg);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  border-left: 3px solid var(--color-info);
+}
+
+.did-you-know span {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-info);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.did-you-know p {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .checker-input-row {
+    flex-direction: column;
+  }
+
+  .myth-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+}

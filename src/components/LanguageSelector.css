@@ -1,0 +1,103 @@
+.lang-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--color-bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.lang-container {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  max-width: 560px;
+  width: 100%;
+}
+
+.lang-flag {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: var(--spacing-md);
+  animation: float 3s ease-in-out infinite;
+}
+
+.lang-header h1 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: var(--spacing-sm);
+}
+
+.lang-brand {
+  background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.lang-header p {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.lang-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.lang-card {
+  background: var(--color-bg-card);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.lang-card:hover {
+  border-color: var(--color-accent-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(255, 153, 51, 0.25);
+  background: var(--color-bg-card-hover);
+}
+
+.lang-letter {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: white;
+  font-family: var(--font-heading);
+}
+
+.lang-card h2 {
+  font-size: 1.4rem;
+  margin-top: var(--spacing-xs);
+}
+
+.lang-card p {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.lang-note {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 480px) {
+  .lang-cards {
+    grid-template-columns: 1fr;
+  }
+}

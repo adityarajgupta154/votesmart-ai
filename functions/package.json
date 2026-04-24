@@ -1,0 +1,22 @@
+{
+  "name": "votesmart-functions",
+  "description": "VoteSmart AI Cloud Functions — TTS endpoint",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.0.0",
+    "firebase-functions": "^5.0.0",
+    "@google-cloud/text-to-speech": "^5.4.0",
+    "cors": "^2.8.5"
+  },
+  "private": true
+}
