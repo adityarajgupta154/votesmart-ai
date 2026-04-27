@@ -18,6 +18,20 @@
         }
       },
       {
+        "source": "/api/chat",
+        "function": {
+          "functionId": "chat",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/api/myth",
+        "function": {
+          "functionId": "myth",
+          "region": "asia-south1"
+        }
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

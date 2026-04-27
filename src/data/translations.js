@@ -115,6 +115,9 @@ const T = {
     settingsLangTitle: 'Language',
     settingsLangDesc: 'Change your preferred language.',
     settingsLangBtn: 'Change Language',
+    settingsSeniorModeTitle: 'Accessibility',
+    settingsSeniorMode: 'Senior Mode (Large Text & High Contrast)',
+    settingsSeniorModeDesc: 'Enhances readability by increasing text size and contrast.',
   },
   hi: {
     // Navbar
@@ -229,6 +232,9 @@ const T = {
     settingsLangTitle: 'भाषा',
     settingsLangDesc: 'अपनी पसंदीदा भाषा बदलें।',
     settingsLangBtn: 'भाषा बदलें',
+    settingsSeniorModeTitle: 'अभिगम्यता (Accessibility)',
+    settingsSeniorMode: 'सीनियर मोड (बड़े अक्षर और उच्च कंट्रास्ट)',
+    settingsSeniorModeDesc: 'टेक्स्ट का आकार और कंट्रास्ट बढ़ाकर पढ़ने में आसानी प्रदान करता है।',
   }
 };
 

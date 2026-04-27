@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { t } from '../data/translations';
 import { votingChecklist, getPersonalizedGuide, statesList } from '../data/votingInfo';
-import './VotingGuide.css';
+import VoterStatus from './VoterStatus';
 
 export default function VotingGuide() {
   const { language } = useLanguage();
@@ -34,33 +34,35 @@ export default function VotingGuide() {
   const progress = (completedCount / checklist.length) * 100;
 
   return (
-    <div className="page-wrapper">
-      <div className="container">
-        <div className="page-header animate-fade-in-up">
-          <h1>{L('guidePageTitle')}</h1>
-          <p>{L('guidePageDesc')}</p>
+    <div className="bg-[#f5efe9] min-h-[calc(100vh-80px)] py-12 px-4">
+      <div className="max-w-6xl mx-auto space-y-8">
+        <div className="text-center animate-fade-in-up">
+          <h1 className="text-[#8b5e34] font-bold text-3xl md:text-4xl mb-4">{L('guidePageTitle')}</h1>
+          <p className="text-gray-600 max-w-2xl mx-auto">{L('guidePageDesc')}</p>
         </div>
 
-        <div className="guide-layout">
-          <div className="guide-form glass-card animate-fade-in-up" id="guide-form">
-            <h3>{L('guideTellUs')}</h3>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="age">{L('guideAge')}</label>
-                <input id="age" type="number" min="1" max="120" value={formData.age} onChange={(e) => setFormData(prev => ({ ...prev, age: e.target.value }))} placeholder="e.g., 19" required />
+        <VoterStatus />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 animate-fade-in-up" id="guide-form">
+            <h3 className="text-gray-800 font-bold text-xl mb-6">{L('guideTellUs')}</h3>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="flex flex-col">
+                <label htmlFor="age" className="text-gray-700 font-medium mb-2">{L('guideAge')}</label>
+                <input id="age" type="number" min="1" max="120" value={formData.age} onChange={(e) => setFormData(prev => ({ ...prev, age: e.target.value }))} placeholder="e.g., 19" required className="bg-white border border-gray-300 rounded-xl text-gray-800 p-3 focus:outline-none focus:border-[#bfa085] focus:ring-1 focus:ring-[#bfa085] transition-colors" />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="state">{L('guideState')}</label>
-                <select id="state" value={formData.state} onChange={(e) => setFormData(prev => ({ ...prev, state: e.target.value }))} required>
+              <div className="flex flex-col">
+                <label htmlFor="state" className="text-gray-700 font-medium mb-2">{L('guideState')}</label>
+                <select id="state" value={formData.state} onChange={(e) => setFormData(prev => ({ ...prev, state: e.target.value }))} required className="bg-white border border-gray-300 rounded-xl text-gray-800 p-3 focus:outline-none focus:border-[#bfa085] focus:ring-1 focus:ring-[#bfa085] transition-colors">
                   <option value="">{L('guideSelectState')}</option>
                   {statesList.map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="registered">{L('guideRegistered')}</label>
-                <select id="registered" value={formData.registered} onChange={(e) => setFormData(prev => ({ ...prev, registered: e.target.value }))} required>
+              <div className="flex flex-col">
+                <label htmlFor="registered" className="text-gray-700 font-medium mb-2">{L('guideRegistered')}</label>
+                <select id="registered" value={formData.registered} onChange={(e) => setFormData(prev => ({ ...prev, registered: e.target.value }))} required className="bg-white border border-gray-300 rounded-xl text-gray-800 p-3 focus:outline-none focus:border-[#bfa085] focus:ring-1 focus:ring-[#bfa085] transition-colors">
                   <option value="">{L('guideSelect')}</option>
                   <option value="Yes">{L('guideYes')}</option>
                   <option value="No">{L('guideNo')}</option>
@@ -68,32 +70,32 @@ export default function VotingGuide() {
                 </select>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="firstTime">{L('guideFirstTime')}</label>
-                <select id="firstTime" value={formData.firstTime} onChange={(e) => setFormData(prev => ({ ...prev, firstTime: e.target.value }))} required>
+              <div className="flex flex-col">
+                <label htmlFor="firstTime" className="text-gray-700 font-medium mb-2">{L('guideFirstTime')}</label>
+                <select id="firstTime" value={formData.firstTime} onChange={(e) => setFormData(prev => ({ ...prev, firstTime: e.target.value }))} required className="bg-white border border-gray-300 rounded-xl text-gray-800 p-3 focus:outline-none focus:border-[#bfa085] focus:ring-1 focus:ring-[#bfa085] transition-colors">
                   <option value="">{L('guideSelect')}</option>
                   <option value="Yes">{L('guideYes')}</option>
                   <option value="No">{L('guideNo')}</option>
                 </select>
               </div>
 
-              <button type="submit" className="btn-primary" style={{ width: '100%' }} id="get-guide-btn">
+              <button type="submit" className="w-full bg-[#bfa085] text-white rounded-full py-3 mt-4 hover:opacity-90 transition-opacity font-medium shadow-md" id="get-guide-btn">
                 {L('guideGetGuide')}
               </button>
             </form>
           </div>
 
-          <div className="guide-results">
+          <div className="space-y-8">
             {tips && (
-              <div className="tips-card glass-card animate-fade-in-up" id="tips-card">
-                <h3>{L('guideTipsTitle')}</h3>
-                <div className="tips-list">
+              <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 animate-fade-in-up" id="tips-card">
+                <h3 className="text-gray-800 font-bold text-xl mb-4">{L('guideTipsTitle')}</h3>
+                <div className="space-y-3">
                   {tips.map((tip, i) => (
-                    <div key={i} className={`tip-item tip-${tip.type}`}>
-                      <span className="tip-icon">
+                    <div key={i} className={`flex items-start gap-3 p-4 rounded-xl border ${tip.type === 'success' ? 'bg-green-50 border-green-200' : tip.type === 'warning' ? 'bg-yellow-50 border-yellow-200' : 'bg-blue-50 border-blue-200'}`}>
+                      <span className="text-lg mt-0.5">
                         {tip.type === 'success' ? '✅' : tip.type === 'warning' ? '⚠️' : 'ℹ️'}
                       </span>
-                      <p>{tip.text}</p>
+                      <p className="text-gray-700 text-sm leading-relaxed">{tip.text}</p>
                     </div>
                   ))}
                 </div>
@@ -101,31 +103,30 @@ export default function VotingGuide() {
             )}
 
             {showChecklist && (
-              <div className="checklist-card glass-card animate-fade-in-up" id="checklist-card">
-                <div className="checklist-header">
-                  <h3>{L('guideChecklistTitle')}</h3>
-                  <span className="checklist-progress-text">{completedCount}/{checklist.length}</span>
+              <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 animate-fade-in-up" id="checklist-card">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-gray-800 font-bold text-xl">{L('guideChecklistTitle')}</h3>
+                  <span className="text-[#8b5e34] font-medium">{completedCount}/{checklist.length}</span>
                 </div>
 
-                <div className="checklist-bar">
-                  <div className="checklist-bar-fill" style={{ width: `${progress}%` }} />
+                <div className="w-full bg-gray-100 rounded-full h-2.5 mb-6 overflow-hidden">
+                  <div className="bg-[#bfa085] h-2.5 rounded-full transition-all duration-500" style={{ width: `${progress}%` }}></div>
                 </div>
 
-                <div className="checklist-items">
+                <div className="space-y-3">
                   {checklist.map(item => (
-                    <label key={item.id} className={`checklist-item ${item.done ? 'done' : ''}`} id={`check-${item.id}`}>
-                      <input type="checkbox" checked={item.done} onChange={() => toggleCheck(item.id)} />
-                      <span className="checkmark" />
-                      <span className="check-text">{language === 'hi' && item.textHi ? item.textHi : item.text}</span>
+                    <label key={item.id} className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${item.done ? 'bg-green-50 border-green-200' : 'bg-white border-gray-200 hover:border-[#bfa085]'}`} id={`check-${item.id}`}>
+                      <input type="checkbox" className="w-5 h-5 rounded border-gray-300 bg-white text-[#bfa085] focus:ring-[#bfa085]" checked={item.done} onChange={() => toggleCheck(item.id)} />
+                      <span className={`flex-1 text-sm ${item.done ? 'text-gray-500 line-through' : 'text-gray-700'}`}>{language === 'hi' && item.textHi ? item.textHi : item.text}</span>
                       {item.link && (
-                        <a href={item.link} target="_blank" rel="noopener" className="check-link">Link →</a>
+                        <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-[#8b5e34] hover:text-[#7a4e24] font-medium text-sm whitespace-nowrap" onClick={(e) => e.stopPropagation()}>Link →</a>
                       )}
                     </label>
                   ))}
                 </div>
 
                 {completedCount === checklist.length && (
-                  <div className="checklist-complete animate-fade-in-up">
+                  <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 text-center font-medium animate-fade-in-up">
                     {L('guideAllSet')}
                   </div>
                 )}

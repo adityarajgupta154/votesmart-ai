@@ -18,6 +18,7 @@ const CLOUD_TTS_URL = '/api/speak';
 
 export function useSpeech() {
   const [speaking, setSpeaking] = useState(false);
+  const [preparing, setPreparing] = useState(false);
   const [activeId, setActiveId] = useState(null);
   const [useCloudTTS, setUseCloudTTS] = useState(null); // null = untested
   const audioRef = useRef(null);
@@ -78,10 +79,14 @@ export function useSpeech() {
   // ──── Cloud TTS (Google Wavenet) ────
   const speakCloud = useCallback(async (text, language, id) => {
     try {
+      setPreparing(true);
+      setActiveId(id);
+      
+      const seniorMode = document.body.classList.contains('senior-mode');
       const resp = await fetch(CLOUD_TTS_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, language }),
+        body: JSON.stringify({ text, language, seniorMode }),
       });
 
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
@@ -95,12 +100,29 @@ export function useSpeech() {
         audioRef.current = null;
       }
 
+      // Add 400ms human-like delay
+      await new Promise(r => setTimeout(r, 400));
+
       const audio = new Audio(audioSrc);
+      audio.volume = 0; // Start at 0 for fade-in
       audioRef.current = audio;
 
       audio.onplay = () => {
+        setPreparing(false);
         setSpeaking(true);
         setActiveId(id);
+        
+        // Fade in effect
+        let vol = 0;
+        const fadeInt = setInterval(() => {
+          if (vol < 0.9) {
+            vol += 0.1;
+            audio.volume = vol;
+          } else {
+            audio.volume = 1;
+            clearInterval(fadeInt);
+          }
+        }, 50);
       };
 
       audio.onended = () => {
@@ -110,6 +132,7 @@ export function useSpeech() {
       };
 
       audio.onerror = () => {
+        setPreparing(false);
         setSpeaking(false);
         setActiveId(null);
         audioRef.current = null;
@@ -119,6 +142,7 @@ export function useSpeech() {
       return true;
     } catch (err) {
       console.warn('Cloud TTS failed, falling back to browser:', err.message);
+      setPreparing(false);
       return false;
     }
   }, []);
@@ -208,10 +232,11 @@ export function useSpeech() {
       audioRef.current = null;
     }
     setSpeaking(false);
+    setPreparing(false);
     setActiveId(null);
   }, []);
 
-  return { speak, stop, speaking, activeId, isCloudTTS: useCloudTTS };
+  return { speak, stop, speaking, preparing, activeId, isCloudTTS: useCloudTTS };
 }
 
 export default useSpeech;

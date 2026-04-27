@@ -3,9 +3,9 @@
   top: 0;
   z-index: 100;
   height: var(--nav-height);
-  background: rgba(10, 14, 26, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -31,10 +31,7 @@
 }
 
 .brand-ai {
-  background: var(--color-accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #8b5e34;
   font-weight: 800;
 }
 
@@ -52,19 +49,19 @@
   border-radius: var(--radius-md);
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: #4b5563; /* text-gray-600 */
   transition: all var(--transition-fast);
   white-space: nowrap;
 }
 
 .nav-link:hover {
-  color: var(--color-text-primary);
-  background: rgba(255, 153, 51, 0.08);
+  color: #8b5e34;
 }
 
 .nav-link.active {
-  color: var(--color-accent-primary-hover);
-  background: rgba(255, 153, 51, 0.12);
+  color: white;
+  background: #bfa085;
+  border-radius: 9999px; /* rounded-full */
 }
 
 .nav-icon {
@@ -85,14 +82,14 @@
   width: 36px;
   height: 36px;
   border-radius: var(--radius-md);
-  color: var(--color-text-secondary);
+  color: #4b5563;
   transition: all var(--transition-fast);
   font-size: 1.2rem;
 }
 
 .settings-btn:hover {
-  color: var(--color-text-primary);
-  background: rgba(255, 153, 51, 0.1);
+  color: #8b5e34;
+  background: rgba(139, 94, 52, 0.1);
 }
 
 .mobile-toggle {
@@ -102,7 +99,7 @@
   width: 36px;
   height: 36px;
   font-size: 1.4rem;
-  color: var(--color-text-secondary);
+  color: #4b5563;
 }
 
 .mobile-backdrop {
@@ -120,7 +117,7 @@
     top: var(--nav-height);
     left: 0;
     right: 0;
-    background: var(--color-bg-secondary);
+    background: white;
     border-bottom: 1px solid var(--color-border);
     flex-direction: column;
     padding: var(--spacing-md);
