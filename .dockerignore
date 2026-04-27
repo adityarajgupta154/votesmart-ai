@@ -1,13 +1,50 @@
+# Dependencies (will be installed fresh inside container)
 node_modules
+
+# Build output (will be built inside container)
+dist
+build
+
+# Git
 .git
 .gitignore
-dist
-*.log
-*.md
-.env*
+
+# Environment files
+.env
+.env.*
+
+# Design reference files (not needed for build)
 new
+
+# Firebase (not needed for Cloud Run)
 functions
 .firebaserc
 firebase.json
-image-optimize.sh
+
+# Root-level unused folders
 components
+
+# Tests (not needed in production image)
+src/**/__tests__
+src/test
+**/*.test.js
+**/*.test.jsx
+**/*.spec.js
+**/*.spec.jsx
+coverage
+
+# Scripts and docs
+*.md
+*.log
+*.bat
+*.sh
+image-optimize.sh
+setup-and-test.bat
+
+# IDE
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
