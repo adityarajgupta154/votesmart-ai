@@ -149,7 +149,7 @@ export default function MythBuster() {
                   </span>
                   <h3 className="text-lg font-semibold text-gray-800">{lt(m, 'myth', language)}</h3>
                 </div>
-                <span className={`text-gray-400 text-xl transition-transform ${expandedId === m.id ? 'rotate-180' : ''}`}>▼</span>
+                <span className={`text-gray-500 text-xl transition-transform ${expandedId === m.id ? 'rotate-180' : ''}`} aria-hidden="true">▼</span>
               </button>
 
               {/* Expanded Content (screen6 style) */}

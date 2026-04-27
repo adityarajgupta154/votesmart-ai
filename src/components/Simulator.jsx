@@ -128,7 +128,7 @@ export default function Simulator() {
                   }`}>
                     {diffLabel(s.difficulty)}
                   </span>
-                  <span className="text-xs text-gray-400">{s.steps.length} {L('simSteps')}</span>
+                  <span className="text-xs text-gray-500">{s.steps.length} {L('simSteps')}</span>
                 </div>
               </button>
             ))}

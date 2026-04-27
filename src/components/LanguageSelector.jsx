@@ -44,6 +44,7 @@ export default function LanguageSelector({ onSelect }) {
               className="flex-1 max-w-sm border border-gray-100 rounded-[2.5rem] p-8 flex flex-col items-center justify-between gap-6 cursor-pointer hover:shadow-md transition-shadow bg-white"
               onClick={() => onSelect('en')}
               id="lang-en"
+              aria-label="Continue in English"
             >
               <div className="bg-[#824c28] w-32 h-32 rounded-[1.5rem] flex items-center justify-center shadow-md">
                 <span className="text-white text-7xl font-bold">A</span>
@@ -59,6 +60,7 @@ export default function LanguageSelector({ onSelect }) {
               className="flex-1 max-w-sm border border-gray-100 rounded-[2.5rem] p-8 flex flex-col items-center justify-between gap-6 cursor-pointer hover:shadow-md transition-shadow bg-white"
               onClick={() => onSelect('hi')}
               id="lang-hi"
+              aria-label="हिंदी में जारी रखें"
             >
               <div className="bg-[#824c28] w-32 h-32 rounded-[1.5rem] flex items-center justify-center shadow-md">
                 <span className="text-white text-7xl font-bold">अ</span>

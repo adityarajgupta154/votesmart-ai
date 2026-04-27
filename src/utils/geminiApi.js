@@ -31,7 +31,7 @@ export async function sendMessage(userMessage, chatHistory = [], language = 'en'
     const data = await response.json();
     return data; // { text: "...", source: "ai" }
   } catch (err) {
-    console.error('AI Error:', err);
+    // Silently fall back on error — no console leaks in production
     return getFallbackResponse(userMessage, language);
   }
 }
@@ -53,7 +53,7 @@ export async function checkMythWithAI(claim, language = 'en') {
     const data = await response.json();
     return data;
   } catch (err) {
-    console.error('Myth AI Error:', err);
+    // Silently fall back on error — no console leaks in production
     const msg = language === 'hi' 
       ? 'इस दावे की जाँच नहीं हो सकी। कृपया eci.gov.in देखें या 1950 पर कॉल करें।' 
       : 'Could not verify this claim. Please check eci.gov.in or call 1950.';

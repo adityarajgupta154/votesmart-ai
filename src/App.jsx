@@ -67,22 +67,25 @@ export default function App() {
 
   return (
     <>
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <Navbar onSettingsClick={() => setShowSettings(true)} />
 
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/simulator" element={<Simulator />} />
-          <Route path="/guide" element={<VotingGuide />} />
-          <Route path="/myths" element={<MythBuster />} />
-          <Route path="/chat" element={<ChatAssistant />} />
-        </Routes>
-      </Suspense>
+      <main id="main-content">
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Hero />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/simulator" element={<Simulator />} />
+            <Route path="/guide" element={<VotingGuide />} />
+            <Route path="/myths" element={<MythBuster />} />
+            <Route path="/chat" element={<ChatAssistant />} />
+          </Routes>
+        </Suspense>
+      </main>
 
       {/* Settings Modal */}
       {showSettings && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={() => setShowSettings(false)} id="settings-modal">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={() => setShowSettings(false)} id="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-title">
           <style>{`
             @keyframes modalFadeIn {
               from { opacity: 0; transform: scale(0.92); }
@@ -94,12 +97,12 @@ export default function App() {
             onClick={e => e.stopPropagation()}
             style={{ animation: 'modalFadeIn 0.3s ease-out forwards' }}
           >
-            <h2 className="text-[#8b5e34] font-bold text-2xl mb-6">{L('settingsTitle')}</h2>
+            <h2 id="settings-title" className="text-[#8b5e34] font-bold text-2xl mb-6">{L('settingsTitle')}</h2>
 
             <div className="space-y-6">
               <div className="space-y-2">
                 <h4 className="text-gray-800 font-semibold text-lg">{L('settingsAITitle')}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{L('settingsAIDesc')}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{L('settingsAIDesc')}</p>
                 <div className="text-sm font-medium mt-2 text-gray-500">
                   <span className="text-gray-600">{L('settingsStatus')}:</span>{' '}
                   {aiConnected
@@ -111,7 +114,7 @@ export default function App() {
 
               <div className="space-y-2">
                 <h4 className="text-gray-800 font-semibold text-lg">{L('settingsSeniorModeTitle')}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{L('settingsSeniorModeDesc')}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{L('settingsSeniorModeDesc')}</p>
                 <label className="flex items-center gap-3 cursor-pointer mt-2 text-gray-600 hover:text-gray-800 transition-colors">
                   <input
                     type="checkbox"
@@ -125,7 +128,7 @@ export default function App() {
 
               <div className="space-y-2">
                 <h4 className="text-gray-800 font-semibold text-lg">{L('settingsLangTitle')}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{L('settingsLangDesc')}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{L('settingsLangDesc')}</p>
                 <button className="mt-2 px-6 py-3 bg-white border border-gray-300 rounded-xl text-gray-700 text-sm hover:bg-gray-50 transition-all" onClick={handleChangeLanguage} id="change-lang-btn">
                   {L('settingsLangBtn')}
                 </button>

@@ -100,48 +100,66 @@ export default function ChatAssistant() {
     setLoading(false);
   };
 
-  const formatMessage = (text) => {
-    return text
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\n- /g, '\n• ')
-      .replace(/\n(\d+)\. /g, '\n$1. ')
-      .replace(/\n/g, '<br/>');
+  /** Safely format message text into React elements (no raw HTML injection) */
+  const renderMessage = (text) => {
+    const lines = text.split('\n');
+    return lines.map((line, idx) => {
+      // Bold: **text**
+      const parts = line.split(/(\*\*.*?\*\*)/g);
+      const rendered = parts.map((part, j) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          return <strong key={j}>{part.slice(2, -2)}</strong>;
+        }
+        // Bullet: - text
+        if (part.startsWith('- ')) {
+          return <span key={j}>• {part.slice(2)}</span>;
+        }
+        return <span key={j}>{part}</span>;
+      });
+      return (
+        <span key={idx}>
+          {rendered}
+          {idx < lines.length - 1 && <br />}
+        </span>
+      );
+    });
   };
 
   return (
-    <div className="bg-gradient-to-br from-[#0b1f3a] to-[#0e2a47] min-h-[calc(100vh-80px)] p-4 flex justify-center items-start pt-8">
+    <div className="bg-[#f5efe9] min-h-[calc(100vh-80px)] p-4 flex justify-center items-start pt-8">
       <div className="w-full max-w-3xl">
-        <div className="rounded-2xl border border-white/10 shadow-lg bg-[#102a43] p-6 flex flex-col h-[75vh]" id="chat-container">
+        <div className="rounded-2xl border border-gray-200 shadow-md bg-white p-6 flex flex-col h-[75vh]" id="chat-container" role="log" aria-label="Chat messages">
           {/* Header */}
-          <div className="flex justify-between items-center border-b border-white/10 pb-4 mb-4">
+          <header className="flex justify-between items-center border-b border-gray-200 pb-4 mb-4">
             <div className="flex items-center gap-3">
-              <span className="text-2xl">🗳️</span>
+              <span className="text-2xl" aria-hidden="true">🗳️</span>
               <div>
-                <h2 className="text-white font-semibold text-xl m-0">{L('chatTitle')}</h2>
-                <span className="text-sm text-gray-400">
+                <h1 className="text-[#8b5e34] font-semibold text-xl m-0">{L('chatTitle')}</h1>
+                <span className="text-sm text-gray-500">
                   {loading ? L('chatThinking') : preparing ? (language === 'hi' ? 'AI आवाज़ तैयार कर रहा है...' : 'AI is preparing to speak...') : speaking ? (language === 'hi' ? 'AI बोल रहा है...' : 'AI is speaking...') : L('chatReady')}
                 </span>
               </div>
             </div>
             <button
-              className="px-4 py-2 bg-transparent border border-gray-600 rounded-full text-white text-sm hover:bg-white/10 transition-colors"
+              className="px-4 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm hover:bg-gray-50 transition-colors"
               onClick={() => setMessages([messages[0]])}
               id="clear-chat-btn"
+              aria-label={language === 'hi' ? 'चैट साफ़ करें' : 'Clear chat'}
             >
               {L('chatClear')}
             </button>
-          </div>
+          </header>
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto space-y-4 pr-2" id="chat-messages">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'assistant' ? 'justify-start' : 'justify-end'}`}>
-                {msg.role === 'assistant' && <span className="text-2xl mr-2 mt-1 flex-shrink-0">🗳️</span>}
+                {msg.role === 'assistant' && <span className="text-2xl mr-2 mt-1 flex-shrink-0" aria-hidden="true">🗳️</span>}
                 <div className={`p-3 max-w-[85%] ${msg.role === 'user'
-                  ? 'bg-gradient-to-r from-[#f59e0b] to-[#f97316] text-white rounded-xl rounded-tr-sm shadow-md'
-                  : 'bg-[#0f2a44] border border-gray-600 text-white rounded-xl rounded-tl-sm'}`}
+                  ? 'bg-[#bfa085] text-white rounded-xl rounded-tr-sm shadow-md'
+                  : 'bg-[#f5efe9] border border-gray-200 text-gray-800 rounded-xl rounded-tl-sm'}`}
                 >
-                  <div className="text-sm md:text-base leading-relaxed" dangerouslySetInnerHTML={{ __html: formatMessage(msg.content) }} />
+                  <div className="text-sm md:text-base leading-relaxed">{renderMessage(msg.content)}</div>
                   {msg.role === 'assistant' && i > 0 && (
                     <div className="mt-2">
                       <ListenButton
@@ -154,7 +172,7 @@ export default function ChatAssistant() {
                     </div>
                   )}
                   {msg.source === 'offline' && (
-                    <span className="block mt-2 text-xs text-[#f59e0b] italic">{L('chatOfflineNote')}</span>
+                    <span className="block mt-2 text-xs text-[#8b5e34] italic">{L('chatOfflineNote')}</span>
                   )}
                 </div>
               </div>
@@ -162,9 +180,9 @@ export default function ChatAssistant() {
 
             {loading && (
               <div className="flex justify-start">
-                <span className="text-2xl mr-2 mt-1 flex-shrink-0">🗳️</span>
-                <div className="bg-[#0f2a44] border border-gray-600 text-white p-4 rounded-xl rounded-tl-sm flex items-center gap-2">
-                  <span className="text-sm text-gray-400">{L('chatThinking')}</span>
+                <span className="text-2xl mr-2 mt-1 flex-shrink-0" aria-hidden="true">🗳️</span>
+                <div className="bg-[#f5efe9] border border-gray-200 text-gray-700 p-4 rounded-xl rounded-tl-sm flex items-center gap-2" role="status" aria-label="Loading">
+                  <span className="text-sm text-gray-500">{L('chatThinking')}</span>
                   <div className="flex gap-1">
                     <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></span>
                     <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
@@ -179,11 +197,11 @@ export default function ChatAssistant() {
 
           {/* Quick suggestion chips */}
           {messages.length <= 1 && (
-            <div className="flex flex-wrap gap-2 mt-4">
+            <div className="flex flex-wrap gap-2 mt-4" role="group" aria-label="Suggested questions">
               {quickQuestions.map((q, i) => (
                 <button
                   key={i}
-                  className="px-4 py-2 border border-gray-600 rounded-full text-sm text-gray-300 hover:text-white hover:border-[#f59e0b]/50 hover:bg-white/5 transition-all text-left"
+                  className="px-4 py-2 border border-gray-300 rounded-full text-sm text-gray-600 hover:text-[#8b5e34] hover:border-[#bfa085]/50 hover:bg-[#f5efe9] transition-all text-left"
                   onClick={() => send(q)}
                   id={`quick-q-${i}`}
                 >
@@ -194,7 +212,8 @@ export default function ChatAssistant() {
           )}
 
           {/* Input bar */}
-          <div className="mt-4 pt-4 border-t border-white/10 flex items-center gap-2" id="chat-input-area">
+          <div className="mt-4 pt-4 border-t border-gray-200 flex items-center gap-2" id="chat-input-area">
+            <label htmlFor="chat-input" className="sr-only">{language === 'hi' ? 'संदेश टाइप करें' : 'Type your message'}</label>
             <input
               type="text"
               value={input}
@@ -202,11 +221,11 @@ export default function ChatAssistant() {
               onKeyDown={(e) => e.key === 'Enter' && send()}
               placeholder={isListening ? (language === 'hi' ? 'सुन रहा हूँ...' : 'Listening...') : L('chatPlaceholder')}
               disabled={loading || isListening}
-              className="flex-1 bg-[#0f2a44] border border-gray-600 rounded-full text-white px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[#f59e0b]/40 focus:border-[#f59e0b] placeholder:text-gray-400 transition-all"
+              className="flex-1 bg-[#f5efe9] border border-gray-300 rounded-full text-gray-800 px-5 py-3 focus:outline-none focus:ring-2 focus:ring-[#bfa085]/40 focus:border-[#bfa085] placeholder:text-gray-400 transition-all"
               id="chat-input"
             />
             <button
-              className={`p-3 rounded-full flex items-center justify-center transition-colors ${isListening ? 'bg-red-500 text-white animate-pulse' : 'text-gray-300 hover:bg-white/10 hover:text-white'}`}
+              className={`p-3 rounded-full flex items-center justify-center transition-colors ${isListening ? 'bg-red-500 text-white animate-pulse' : 'text-gray-500 hover:bg-gray-100 hover:text-[#8b5e34]'}`}
               onClick={handleListen}
               disabled={loading}
               id="mic-btn"
@@ -216,7 +235,7 @@ export default function ChatAssistant() {
               <IconMic />
             </button>
             <button
-              className="bg-gradient-to-r from-[#f59e0b] to-[#f97316] p-3 rounded-full text-white hover:opacity-90 flex items-center justify-center transition-opacity disabled:opacity-50 disabled:cursor-not-allowed shadow-md shadow-orange-500/20"
+              className="bg-[#bfa085] p-3 rounded-full text-white hover:opacity-90 flex items-center justify-center transition-opacity disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
               onClick={() => send()}
               disabled={loading || !input.trim()}
               id="send-btn"

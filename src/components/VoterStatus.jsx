@@ -43,13 +43,13 @@ export default function VoterStatus() {
   ];
 
   return (
-    <div className="rounded-2xl border border-white/10 shadow-lg bg-[#102a43] p-6" id="voter-status-section">
-      <h3 className="text-white font-semibold text-xl mb-2">{language === 'hi' ? '🗳️ मतदाता स्थिति जांचें (सिम्युलेटेड)' : '🗳️ Check Voter Status (Simulated)'}</h3>
-      <p className="text-gray-400 mb-6">{language === 'hi' ? 'जानें कि आपका नाम मतदाता सूची में है या नहीं।' : 'Find out if your name is on the voter list.'}</p>
+    <section className="rounded-2xl border border-gray-200 shadow-md bg-white p-6" id="voter-status-section" aria-label="Voter Status Checker">
+      <h3 className="text-[#8b5e34] font-semibold text-xl mb-2">{language === 'hi' ? '🗳️ मतदाता स्थिति जांचें (सिम्युलेटेड)' : '🗳️ Check Voter Status (Simulated)'}</h3>
+      <p className="text-gray-600 mb-6">{language === 'hi' ? 'जानें कि आपका नाम मतदाता सूची में है या नहीं।' : 'Find out if your name is on the voter list.'}</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col gap-1">
-          <label htmlFor="voterName" className="text-white font-semibold text-sm">{language === 'hi' ? 'पूरा नाम' : 'Full Name'}</label>
+          <label htmlFor="voterName" className="text-gray-700 font-semibold text-sm">{language === 'hi' ? 'पूरा नाम' : 'Full Name'}</label>
           <input
             id="voterName"
             type="text"
@@ -57,17 +57,17 @@ export default function VoterStatus() {
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder={language === 'hi' ? 'अपना नाम दर्ज करें' : 'Enter your name'}
             required
-            className="bg-[#0f2a44] border border-gray-600 rounded-xl text-white placeholder:text-gray-400 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#f59e0b]/40 focus:border-[#f59e0b] transition-all"
+            className="bg-white border border-gray-300 rounded-xl text-gray-800 placeholder:text-gray-400 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#bfa085]/40 focus:border-[#bfa085] transition-all"
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label htmlFor="voterState" className="text-white font-semibold text-sm">{language === 'hi' ? 'राज्य' : 'State'}</label>
+          <label htmlFor="voterState" className="text-gray-700 font-semibold text-sm">{language === 'hi' ? 'राज्य' : 'State'}</label>
           <select
             id="voterState"
             value={formData.state}
             onChange={(e) => setFormData({ ...formData, state: e.target.value })}
             required
-            className="bg-[#0f2a44] border border-gray-600 rounded-xl text-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#f59e0b]/40 focus:border-[#f59e0b] transition-all appearance-none"
+            className="bg-white border border-gray-300 rounded-xl text-gray-800 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#bfa085]/40 focus:border-[#bfa085] transition-all appearance-none"
           >
             <option value="">{language === 'hi' ? 'राज्य चुनें' : 'Select State'}</option>
             {statesList.map(s => <option key={s} value={s}>{s}</option>)}
@@ -75,24 +75,25 @@ export default function VoterStatus() {
         </div>
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-[#f59e0b] to-[#f97316] rounded-full text-white py-3 px-6 hover:opacity-90 font-semibold transition-opacity flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-[#bfa085] rounded-full text-white py-3 px-6 hover:opacity-90 font-semibold transition-opacity flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={loading || !formData.name.trim() || !formData.state}
+          aria-label={language === 'hi' ? 'स्थिति जांचें' : 'Check Status'}
         >
-          {loading ? <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" /> : (language === 'hi' ? 'स्थिति जांचें' : 'Check Status')}
+          {loading ? <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" role="status" aria-label="Loading" /> : (language === 'hi' ? 'स्थिति जांचें' : 'Check Status')}
         </button>
       </form>
 
       {result && (
-        <div className={`mt-6 p-4 rounded-xl border ${result.status === 'found' ? 'bg-green-900/30 border-green-500/30' : 'bg-red-900/30 border-red-500/30'} animate-fade-in-up`}>
-          <div className="text-white font-semibold">{result.message}</div>
+        <div className={`mt-6 p-4 rounded-xl border ${result.status === 'found' ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'} animate-fade-in-up`} role="alert">
+          <div className={`font-semibold ${result.status === 'found' ? 'text-green-700' : 'text-red-700'}`}>{result.message}</div>
           {result.suggestion && (
-            <div className="text-gray-400 mt-2 text-sm">
-              <strong className="text-white">{language === 'hi' ? 'सुझाव: ' : 'Suggestion: '}</strong>
+            <div className="text-gray-600 mt-2 text-sm">
+              <strong className="text-gray-800">{language === 'hi' ? 'सुझाव: ' : 'Suggestion: '}</strong>
               {result.suggestion}
             </div>
           )}
         </div>
       )}
-    </div>
+    </section>
   );
 }

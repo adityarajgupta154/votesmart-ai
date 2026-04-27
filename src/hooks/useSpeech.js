@@ -141,7 +141,7 @@ export function useSpeech() {
       await audio.play();
       return true;
     } catch (err) {
-      console.warn('Cloud TTS failed, falling back to browser:', err.message);
+      // Cloud TTS unavailable — silently fall back to browser
       setPreparing(false);
       return false;
     }
