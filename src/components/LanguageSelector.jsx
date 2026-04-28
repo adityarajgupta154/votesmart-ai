@@ -1,4 +1,4 @@
-import './LanguageSelector.css';
+
 
 export default function LanguageSelector({ onSelect }) {
   return (

@@ -213,6 +213,20 @@ npm run test:coverage # Coverage report
 - **HTTP security headers** — CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy
 - **Input validation** — all user inputs validated before API submission
 
+### Security Notice regarding Development Dependencies
+
+The project uses Vite for development. Some moderate vulnerabilities are reported in development dependencies (esbuild via Vite).
+
+These vulnerabilities:
+- Only affect the local development server
+- Do NOT impact production builds
+- Are not exposed to end users
+
+Production is deployed using optimized static build, ensuring:
+- No dev server exposure
+- Secure API handling via backend
+- No sensitive data leakage
+
 ---
 
 ## 📦 Deployment

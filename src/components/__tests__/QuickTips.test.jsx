@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '../test/test-utils';
-import QuickTips from './QuickTips';
+import { render, screen } from '../../test/test-utils';
+import QuickTips from '../QuickTips';
 
 describe('QuickTips Component', () => {
   it('renders the h2 heading', () => {

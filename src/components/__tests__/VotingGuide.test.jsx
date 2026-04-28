@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '../test/test-utils';
-import VotingGuide from './VotingGuide';
+import { render, screen } from '../../test/test-utils';
+import VotingGuide from '../VotingGuide';
 
 // Mock useSpeech
-vi.mock('../hooks/useSpeech', () => ({
+vi.mock('../../hooks/useSpeech', () => ({
   useSpeech: () => ({
     speak: vi.fn(),
     stop: vi.fn(),

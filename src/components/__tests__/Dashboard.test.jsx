@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '../test/test-utils';
-import Dashboard from './Dashboard';
+import { render, screen } from '../../test/test-utils';
+import Dashboard from '../Dashboard';
 
 describe('Dashboard Component', () => {
   it('renders main landmark', () => {

@@ -5,7 +5,7 @@ import { t } from './data/translations';
 import Navbar from './components/Navbar';
 import LanguageSelector from './components/LanguageSelector';
 import PageLoader from './components/PageLoader';
-import { initializeAI } from './utils/geminiApi';
+
 
 const Hero = lazy(() => import('./components/Hero'));
 const Simulator = lazy(() => import('./components/Simulator'));
@@ -101,7 +101,7 @@ export default function App() {
 
             <div className="space-y-6">
               <div className="space-y-2">
-                <h4 className="text-gray-800 font-semibold text-lg">{L('settingsAITitle')}</h4>
+                <h3 className="text-gray-800 font-semibold text-lg">{L('settingsAITitle')}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{L('settingsAIDesc')}</p>
                 <div className="text-sm font-medium mt-2 text-gray-500">
                   <span className="text-gray-600">{L('settingsStatus')}:</span>{' '}
@@ -113,7 +113,7 @@ export default function App() {
               </div>
 
               <div className="space-y-2">
-                <h4 className="text-gray-800 font-semibold text-lg">{L('settingsSeniorModeTitle')}</h4>
+                <h3 className="text-gray-800 font-semibold text-lg">{L('settingsSeniorModeTitle')}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{L('settingsSeniorModeDesc')}</p>
                 <label className="flex items-center gap-3 cursor-pointer mt-2 text-gray-600 hover:text-gray-800 transition-colors">
                   <input
@@ -127,7 +127,7 @@ export default function App() {
               </div>
 
               <div className="space-y-2">
-                <h4 className="text-gray-800 font-semibold text-lg">{L('settingsLangTitle')}</h4>
+                <h3 className="text-gray-800 font-semibold text-lg">{L('settingsLangTitle')}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{L('settingsLangDesc')}</p>
                 <button className="mt-2 px-6 py-3 bg-white border border-gray-300 rounded-xl text-gray-700 text-sm hover:bg-gray-50 transition-all" onClick={handleChangeLanguage} id="change-lang-btn">
                   {L('settingsLangBtn')}

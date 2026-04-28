@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { initializeAI, sendMessage, checkMythWithAI } from './geminiApi';
+import { initializeAI, sendMessage, checkMythWithAI } from '../geminiApi';
 
 // Mock fetch globally
 const mockFetch = vi.fn();

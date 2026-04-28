@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '../test/test-utils';
-import Simulator from './Simulator';
+import { render, screen, fireEvent } from '../../test/test-utils';
+import Simulator from '../Simulator';
 
 describe('Simulator Component', () => {
   it('renders the h1 heading', () => {
@@ -24,7 +24,6 @@ describe('Simulator Component', () => {
     render(<Simulator />);
     const buttons = screen.getAllByRole('button');
     fireEvent.click(buttons[0]);
-    // Should now show score text
     expect(screen.getByText(/score|स्कोर/i)).toBeInTheDocument();
   });
 
@@ -40,7 +39,6 @@ describe('Simulator Component', () => {
     const scenarioButtons = screen.getAllByRole('button');
     fireEvent.click(scenarioButtons[0]);
     const allButtons = screen.getAllByRole('button');
-    // More buttons visible in playing phase (options + back)
     expect(allButtons.length).toBeGreaterThanOrEqual(3);
   });
 });

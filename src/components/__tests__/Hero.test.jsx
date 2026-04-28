@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '../test/test-utils';
-import Hero from './Hero';
+import { render, screen } from '../../test/test-utils';
+import Hero from '../Hero';
 
 describe('Hero Component', () => {
   it('renders without crashing', () => {

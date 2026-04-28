@@ -19,6 +19,8 @@ export default defineConfig({
     sourcemap: false,
     cssCodeSplit: true,
     target: 'esnext',
+    minify: 'esbuild',
+    chunkSizeWarningLimit: 500,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -36,7 +38,14 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
-      include: ['src/components/**/*.jsx', 'src/contexts/**/*.jsx', 'src/hooks/**/*.js', 'src/utils/**/*.js'],
+      include: [
+        'src/components/**/*.jsx',
+        'src/contexts/**/*.jsx',
+        'src/hooks/**/*.js',
+        'src/utils/**/*.js',
+        'src/services/**/*.js',
+      ],
     }
   }
 })
+

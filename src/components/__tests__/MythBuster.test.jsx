@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '../test/test-utils';
-import MythBuster from './MythBuster';
+import { render, screen, fireEvent } from '../../test/test-utils';
+import MythBuster from '../MythBuster';
 
 // Mock the geminiApi module
-vi.mock('../utils/geminiApi', () => ({
+vi.mock('../../utils/geminiApi', () => ({
   checkMythWithAI: vi.fn().mockResolvedValue({
     verdict: 'myth',
     explanation: 'This is false.',
@@ -12,7 +12,7 @@ vi.mock('../utils/geminiApi', () => ({
 }));
 
 // Mock useSpeech hook
-vi.mock('../hooks/useSpeech', () => ({
+vi.mock('../../hooks/useSpeech', () => ({
   useSpeech: () => ({
     speak: vi.fn(),
     stop: vi.fn(),
@@ -61,14 +61,19 @@ describe('MythBuster Component', () => {
     expect(headings.length).toBeGreaterThanOrEqual(1);
   });
 
+  it('has hidden label for screen readers on claim input', () => {
+    render(<MythBuster />);
+    const label = document.querySelector('label[for="claim-input"]');
+    expect(label).toBeInTheDocument();
+    expect(label.className).toContain('sr-only');
+  });
+
   it('expands myth card on button click', () => {
     render(<MythBuster />);
     const buttons = screen.getAllByRole('button');
-    // Find a button that contains the expand arrow
     const expandBtn = buttons.find(b => b.querySelector('[aria-hidden="true"]'));
     if (expandBtn) {
       fireEvent.click(expandBtn);
-      // After expansion, reality section should appear
       expect(screen.getByText(/reality|वास्तविकता/i)).toBeInTheDocument();
     }
   });

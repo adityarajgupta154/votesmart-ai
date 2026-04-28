@@ -151,7 +151,7 @@ export default function ChatAssistant() {
           </header>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto space-y-4 pr-2" id="chat-messages">
+          <div className="flex-1 overflow-y-auto space-y-4 pr-2" id="chat-messages" aria-live="polite" aria-relevant="additions">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'assistant' ? 'justify-start' : 'justify-end'}`}>
                 {msg.role === 'assistant' && <span className="text-2xl mr-2 mt-1 flex-shrink-0" aria-hidden="true">🗳️</span>}

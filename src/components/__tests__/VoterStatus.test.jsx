@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '../test/test-utils';
-import VoterStatus from './VoterStatus';
+import { render, screen, fireEvent, waitFor } from '../../test/test-utils';
+import VoterStatus from '../VoterStatus';
 
 describe('VoterStatus Component', () => {
   it('renders the section with aria-label', () => {

@@ -1,14 +1,14 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '../test/test-utils';
-import ChatAssistant from './ChatAssistant';
+import { render, screen, fireEvent } from '../../test/test-utils';
+import ChatAssistant from '../ChatAssistant';
 
 // Mock geminiApi
-vi.mock('../utils/geminiApi', () => ({
+vi.mock('../../utils/geminiApi', () => ({
   sendMessage: vi.fn().mockResolvedValue({ text: 'Mocked AI response', source: 'ai' })
 }));
 
 // Mock useSpeech hook
-vi.mock('../hooks/useSpeech', () => ({
+vi.mock('../../hooks/useSpeech', () => ({
   useSpeech: () => ({
     speak: vi.fn(),
     stop: vi.fn(),
@@ -75,8 +75,13 @@ describe('ChatAssistant Component', () => {
 
   it('does not use dangerouslySetInnerHTML', () => {
     const { container } = render(<ChatAssistant />);
-    // Verify safe rendering — no raw HTML injection
     const html = container.innerHTML;
     expect(html).not.toContain('dangerouslySetInnerHTML');
+  });
+
+  it('has aria-live region for messages', () => {
+    const { container } = render(<ChatAssistant />);
+    const messagesContainer = container.querySelector('#chat-messages');
+    expect(messagesContainer).toHaveAttribute('aria-live', 'polite');
   });
 });

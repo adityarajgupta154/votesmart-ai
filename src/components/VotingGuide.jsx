@@ -45,7 +45,7 @@ export default function VotingGuide() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 animate-fade-in-up" id="guide-form">
-            <h3 className="text-gray-800 font-bold text-xl mb-6">{L('guideTellUs')}</h3>
+            <h2 className="text-gray-800 font-bold text-xl mb-6">{L('guideTellUs')}</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="flex flex-col">
                 <label htmlFor="age" className="text-gray-700 font-medium mb-2">{L('guideAge')}</label>
@@ -88,7 +88,7 @@ export default function VotingGuide() {
           <div className="space-y-8">
             {tips && (
               <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 animate-fade-in-up" id="tips-card">
-                <h3 className="text-gray-800 font-bold text-xl mb-4">{L('guideTipsTitle')}</h3>
+                <h2 className="text-gray-800 font-bold text-xl mb-4">{L('guideTipsTitle')}</h2>
                 <div className="space-y-3">
                   {tips.map((tip, i) => (
                     <div key={i} className={`flex items-start gap-3 p-4 rounded-xl border ${tip.type === 'success' ? 'bg-green-50 border-green-200' : tip.type === 'warning' ? 'bg-yellow-50 border-yellow-200' : 'bg-blue-50 border-blue-200'}`}>
@@ -105,7 +105,7 @@ export default function VotingGuide() {
             {showChecklist && (
               <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 animate-fade-in-up" id="checklist-card">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-gray-800 font-bold text-xl">{L('guideChecklistTitle')}</h3>
+                  <h2 className="text-gray-800 font-bold text-xl">{L('guideChecklistTitle')}</h2>
                   <span className="text-[#8b5e34] font-medium">{completedCount}/{checklist.length}</span>
                 </div>
 

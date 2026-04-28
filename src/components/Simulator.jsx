@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useLanguage, lt } from '../contexts/LanguageContext';
 import { t } from '../data/translations';
 import { simulatorScenarios } from '../data/simulatorSteps';
-import './Simulator.css';
 
 export default function Simulator() {
   const { language } = useLanguage();
